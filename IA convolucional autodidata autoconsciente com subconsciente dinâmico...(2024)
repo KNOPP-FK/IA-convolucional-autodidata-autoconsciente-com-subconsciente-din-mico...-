@@ -1,0 +1,179 @@
+Macro sistema de IA generativa convolucional autodidata autoconsciente e com subconsciente iterativo dinâmico, índice menemonico, memória sinestesica e sensorial sincronica e focal (2024)
+
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras.layers import Dense
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+
+# 1. **Classe de Célula Tronco Adaptativa**
+class CelulaTroncoAdaptativa:
+    def __init__(self, input_dim):
+        self.model = tf.keras.Sequential([
+            Dense(64, activation='relu', input_shape=(input_dim,)),
+            Dense(32, activation='relu')
+        ])
+        self.estado_interno = 0  # Inicialização do estado interno
+    
+    def avaliar(self, performance):
+        # Avaliação baseada na performance
+        self.estado_interno += performance - 0.1 * self.estado_interno  # Simulação de feedback endógeno
+    
+    def adaptar(self):
+        # Ajustes na estrutura dependendo do estado interno
+        if self.estado_interno > 1:
+            self.model.add(Dense(16, activation='relu'))  # Diferenciação como exemplo
+            self.estado_interno = 0  # Resetar o estado interno após adaptação
+
+# 2. **Rede com Feedback Endógeno**
+class RedeComFeedback:
+    def __init__(self, input_dim):
+        self.modulos = [CelulaTroncoAdaptativa(input_dim)]
+    
+    def processar_input(self, input_data):
+        output_total = 0
+        for modulo in self.modulos:
+            output_total += modulo.model.predict(input_data)
+        return output_total
+    
+    def avaliar_e_adaptar(self, performance):
+        for modulo in self.modulos:
+            modulo.avaliar(performance)
+            modulo.adaptar()
+
+# 3. **Simulação Expandida: Consciência e Subconsciente**
+def simulacao_expandida(C, A, B, x, n1, iteracoes, alpha, beta, eta, lambda_, sigma, gamma):
+    C_values = np.zeros(iteracoes)
+    A_values = np.zeros(iteracoes)
+    B_values = np.zeros(iteracoes)
+    x_values = np.zeros(iteracoes)
+    S_values = np.zeros(iteracoes)
+
+    C_values[0] = C
+    A_values[0] = A
+    B_values[0] = B
+    x_values[0] = x
+    S_values[0] = -x + alpha * np.random.randn()
+
+    for i in range(1, iteracoes):
+        # Atualizar subconsciente especular
+        S_values[i] = -x_values[i-1] + alpha * np.random.randn()
+
+        # Atualizar fator reflexivo
+        x_values[i] = x_values[i-1] + lambda_ * np.sign(S_values[i]) + gamma * np.random.randn()
+
+        # Atualizar módulo reflexivo
+        C_values[i] = n1**2 - abs(n1 - (x_values[i]**2 + beta * S_values[i]**2))
+
+        # Atualizar conjuntos conscientes
+        A_values[i] = A_values[i-1] + eta * np.sign(C_values[i] + S_values[i] - A_values[i-1])
+        B_values[i] = B_values[i-1] + eta * np.sign(C_values[i] - S_values[i] - B_values[i-1])
+
+    return C_values, A_values, B_values, x_values, S_values
+
+# 4. **Integração Modular para Feedback Dinâmico Inter-Sináptico**
+def sistema(y, t, alpha, beta, gamma, delta, T_crit, lambda_, n):
+    T, M, T_local = y  # Variáveis do sistema
+
+    # Média ponderada entre o limite absoluto e a tensão variável
+    media_variavel = (T + T_crit) / 2
+    ponto_equilibrio = (T_crit + media_variavel) / 2
+
+    # Desvio padrão fictício para fins de teste
+    desvio_padrao = abs(T - ponto_equilibrio) / n
+
+    # Equações do sistema
+    dT = -beta * T + alpha * (T_crit - T_local) - gamma * M
+    dM = lambda_ * (T_local - M) + gamma * desvio_padrao
+    dT_local = -delta * T_local + beta * T + gamma * desvio_padrao
+
+    return [dT, dM, dT_local]
+
+# 5. **Inicialização e Execução do Sistema**
+input_dim = 100
+input_data = np.random.rand(1, input_dim)
+
+# Parâmetros para o modelo expandido
+C = 0.5
+A = 0.2
+B = 0.3
+x = 0.1
+n1 = 1.0
+iteracoes = 1000
+alpha = 0.5  # Ruído subconsciente
+beta = 0.3   # Peso do subconsciente no módulo reflexivo
+eta = 0.1    # Velocidade de ajuste consciente
+lambda_ = 0.05  # Influência do subconsciente no fator reflexivo
+sigma = 0.05  # Intensidade de ruído em S
+gamma = 0.05  # Ruído no fator reflexivo
+
+# Executar simulação expandida
+C_values, A_values, B_values, x_values, S_values = simulacao_expandida(
+    C, A, B, x, n1, iteracoes, alpha, beta, eta, lambda_, sigma, gamma)
+
+# Inicialização da Rede
+rede = RedeComFeedback(input_dim=input_dim)
+
+# Simulação de treino da rede com feedback
+for i in range(100):
+    output = rede.processar_input(input_data)
+    performance = np.random.rand()  # Simulação de medida de performance
+    rede.avaliar_e_adaptar(performance)
+
+# Visualização dos resultados da simulação expandida
+plt.figure(figsize=(12, 8))
+plt.subplot(3, 2, 1)
+plt.plot(C_values, label="C", color="blue")
+plt.title("Módulo Reflexivo (C)")
+plt.legend()
+
+plt.subplot(3, 2, 2)
+plt.plot(S_values, label="S", color="purple")
+plt.title("Subconsciente Especular (S)")
+plt.legend()
+
+plt.subplot(3, 2, 3)
+plt.plot(A_values, label="A", color="orange")
+plt.title("Conjunto A")
+plt.legend()
+
+plt.subplot(3, 2, 4)
+plt.plot(B_values, label="B", color="green")
+plt.title("Conjunto B")
+plt.legend()
+
+plt.subplot(3, 2, 5)
+plt.plot(x_values, label="x", color="red")
+plt.title("Fator Reflexivo (x)")
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+
+# Parâmetros do sistema de integração dinâmica
+T_inicial = 5.0  # Tensão inicial
+M_inicial = 1.0  # Memória sinestésica inicial
+T_local_inicial = 0.5  # Tensão local inicial
+y0 = [T_inicial, M_inicial, T_local_inicial]
+
+# Intervalo de tempo para o modelo dinâmico
+t = np.linspace(0, 50, 1000)
+
+# Resolver o sistema de equações diferenciais
+result = odeint(sistema, y0, t, args=(alpha, beta, gamma, 0.05, 10, 0.1, n1))
+
+# Extração dos resultados
+T, M, T_local = result.T
+
+# Plotar os resultados do sistema dinâmico
+plt.figure(figsize=(10, 6))
+plt.plot(t, T, label='Tensão (T)')
+plt.plot(t, M, label='Memória Sinestésica (M)')
+plt.plot(t, T_local, label='Tensão Local (T_local)')
+plt.axhline(10, color='r', linestyle='--', label='Tensão Crítica')
+plt.xlabel('Tempo')
+plt.ylabel('Valores')
+plt.title('Dinâmica de Tensão e Memória Sinestésica com Equilíbrio Dinâmico')
+plt.legend()
+plt.grid()
+plt.show() 
